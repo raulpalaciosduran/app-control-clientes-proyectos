@@ -1,7 +1,5 @@
 # EPS Vial – App de Control de Clientes y Proyectos
 
-# App de Control de Clientes y Proyectos
-
 ![Java CI with Maven](https://github.com/raulpalaciosduran/app-control-clientes-proyectos/actions/workflows/ci.yml/badge.svg)
 
 
