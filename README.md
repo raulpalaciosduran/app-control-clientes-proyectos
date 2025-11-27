@@ -1,5 +1,10 @@
 # EPS Vial – App de Control de Clientes y Proyectos
 
+# App de Control de Clientes y Proyectos
+
+![Java CI with Maven](https://github.com/raulpalaciosduran/app-control-clientes-proyectos/actions/workflows/ci.yml/badge.svg)
+
+
 ## 📌 Descripción
 Aplicación modular para la gestión de clientes, proyectos y pagos.  
 Diseñada para EPS Vial como parte de la entrega académica y profesional, con evidencia en Trello y GitHub.
