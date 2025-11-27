@@ -1,7 +1,0 @@
-language: java
-jdk:
-  - openjdk11
-
-# Aquí defines qué quieres que se ejecute
-script:
-  - mvn test
