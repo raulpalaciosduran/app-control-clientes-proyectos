@@ -61,11 +61,7 @@
         </dependency>
 
         <!-- Lombok (opcional, para reducir boilerplate en entidades) -->
-        <dependency>
-            <groupId>org.projectlombok</groupId>
-            <artifactId>lombok</artifactId>
-            <optional>true</optional>
-        </dependency>
+        
         
         <!-- Thymeleaf -->
         <dependency>
@@ -85,8 +81,9 @@
              <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-thymeleaf</artifactId>
         </dependency>
+        
     </dependencies>
-   
+      
         <build>
         <plugins>
             <plugin>
@@ -103,6 +100,4 @@
             </plugin>
         </plugins>
         </build>
-
-
 </project>
