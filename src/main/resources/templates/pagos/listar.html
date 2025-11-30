@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Listado de Pagos</title>
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+</head>
+<body>
+    <!-- Navbar reutilizable -->
+    <div th:replace="fragments/navbar :: navbar"></div>
+
+    <div class="container mt-4">
+        <h2>Listado de Pagos</h2>
+        <a th:href="@{/pagos/nuevo}" class="btn btn-primary mb-3">➕ Nuevo Pago</a>
+
+        <table class="table table-hover table-bordered">
+            <thead class="table-dark">
+                <tr>
+                    <th>ID</th>
+                    <th>Monto</th>
+                    <th>Fecha</th>
+                    <th>Proyecto</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="pago : ${pagos}">
+                    <td th:text="${pago.id}"></td>
+                    <td th:text="${pago.monto}"></td>
+                    <td th:text="${pago.fecha}"></td>
+                    <td th:text="${pago.proyecto.nombre}"></td>
+                    <td>
+                        <a th:href="@{'/pagos/editar/' + ${pago.id}}" class="btn btn-warning btn-sm">✏️ Editar</a>
+                        <a th:href="@{'/pagos/eliminar/' + ${pago.id}}" 
+                           class="btn btn-danger btn-sm"
+                           onclick="return confirm('¿Seguro que deseas eliminar este pago?');">🗑️ Eliminar</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>

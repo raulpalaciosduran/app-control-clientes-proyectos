@@ -1,13 +1,9 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package com.epsvial.app.repository;
 
-/**
- *
- * @author macbook
- */
-public class PagoRepository {
-    
+import com.epsvial.app.model.Pago;
+import org.springframework.data.jpa.repository.JpaRepository;
+import java.util.List;
+
+public interface PagoRepository extends JpaRepository<Pago, Long> {
+    List<Pago> findByProyectoId(Long proyectoId);
 }
