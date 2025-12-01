@@ -27,9 +27,10 @@ FROM eclipse-temurin:17-jre-alpine
 WORKDIR /app
 
 # 1. Instalar herramientas necesarias:
-#    - netcat-openbsd: Para realizar el "ping" al puerto de la base de datos (DB_PORT).
+#    - netcat-openbsd: Para el chequeo inicial de puerto.
 #    - bash: Para ejecutar el script de shell (run-app.sh).
-RUN apk add --no-cache netcat-openbsd bash
+#    - mysql-client: ¡AGREGADO! Necesario para verificar la autenticación SQL.
+RUN apk add --no-cache netcat-openbsd bash mysql-client
 
 # 2. Copia y da permisos al script de espera
 # Este archivo DEBE existir en la misma carpeta que el Dockerfile.
@@ -45,4 +46,3 @@ EXPOSE 8080
 # 4. Establecer el script de espera como el punto de entrada (ENTRYPOINT)
 #    Esto garantiza que el script se ejecute ANTES de la aplicación Java.
 ENTRYPOINT ["/app/run-app.sh"]
-

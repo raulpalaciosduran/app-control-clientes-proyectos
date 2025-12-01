@@ -1,35 +1,15 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-</head>
 <body>
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark" th:fragment="navbar">
-    <div class="container-fluid">
-        <a class="navbar-brand" href="#">EPSVial</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" 
-                data-bs-target="#navbarNav" aria-controls="navbarNav" 
-                aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
+<nav class="navbar navbar-dark bg-dark" th:fragment="navbar">
+    <div class="container-fluid d-flex justify-content-between">
+        <!-- Branding -->
+        <a class="navbar-brand fw-bold" href="#">EPSVial</a>
 
-        <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav me-auto">
-                <!-- Accesos principales -->
-                <li class="nav-item">
-                    <a class="nav-link" th:href="@{/clientes}">👥 Clientes</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" th:href="@{/proyectos}">📂 Proyectos</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" th:href="@{/pagos}">💵 Pagos</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" th:href="@{/dashboard}">📊 Dashboard</a>
-                </li>
-            </ul>
-        </div>
+        <!-- Botón cerrar sesión -->
+        <form th:action="@{/logout}" method="post" class="d-inline">
+            <button type="submit" class="btn btn-outline-light btn-sm">⏻ Cerrar sesión</button>
+        </form>
     </div>
 </nav>
 </body>

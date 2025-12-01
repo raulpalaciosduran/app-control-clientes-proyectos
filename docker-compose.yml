@@ -1,4 +1,5 @@
 version: '3.8'
+
 services:
   app:
     build: .
@@ -13,20 +14,24 @@ services:
       SPRING_DATASOURCE_USERNAME: root
       SPRING_DATASOURCE_PASSWORD: root
       SPRING_DATASOURCE_DRIVER_CLASS_NAME: com.mysql.cj.jdbc.Driver
+      SPRING_PROFILES_ACTIVE: docker
 
   mysql:
     image: mysql:8.0
-    container_name: mysql
+    restart: always
     ports:
       - "3307:3306"
     environment:
       MYSQL_ROOT_PASSWORD: root
       MYSQL_DATABASE: epsvial
     volumes:
-      - ./mysql_data:/var/lib/mysql
+      - mysql_data:/var/lib/mysql
     healthcheck:
       test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-uroot", "-proot"]
       interval: 10s
       timeout: 5s
       retries: 5
-      start_period: 10s
+      start_period: 30s
+
+volumes:
+  mysql_data:

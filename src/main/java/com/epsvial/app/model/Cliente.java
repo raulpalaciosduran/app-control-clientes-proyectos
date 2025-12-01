@@ -3,7 +3,7 @@ package com.epsvial.app.model;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "clientes") // opcional, para definir nombre exacto de la tabla
+@Table(name = "clientes")
 public class Cliente {
 
     @Id
@@ -14,37 +14,22 @@ public class Cliente {
     private String correo;
     private String telefono;
 
+    @OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL, orphanRemoval = true)
+    private java.util.List<Proyecto> proyectos = new java.util.ArrayList<>();
+
     // --- Getters y Setters ---
-    public Long getId() {
-        return id;
-    }
+    public Long getId() { return id; }
+    public void setId(Long id) { this.id = id; }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+    public String getNombre() { return nombre; }
+    public void setNombre(String nombre) { this.nombre = nombre; }
 
-    public String getNombre() {
-        return nombre;
-    }
+    public String getCorreo() { return correo; }
+    public void setCorreo(String correo) { this.correo = correo; }
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
+    public String getTelefono() { return telefono; }
+    public void setTelefono(String telefono) { this.telefono = telefono; }
 
-    public String getCorreo() {
-        return correo;
-    }
-
-    public void setCorreo(String correo) {
-        this.correo = correo;
-    }
-
-    public String getTelefono() {
-        return telefono;
-    }
-
-    public void setTelefono(String telefono) {
-        this.telefono = telefono;
-    }
+    public java.util.List<Proyecto> getProyectos() { return proyectos; }
+    public void setProyectos(java.util.List<Proyecto> proyectos) { this.proyectos = proyectos; }
 }
-
