@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${titulo}"></title>
+    <link rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+    <link rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+</head>
+<body class="bg-light">
+
+    <!-- Navbar fragment -->
+    <div th:replace="~{fragments/navbar :: navbar}"></div>
+
+    <div class="d-flex">
+        <!-- Sidebar fragment -->
+        <div th:replace="~{fragments/sidebar :: sidebar}"></div>
+
+        <!-- Contenido principal -->
+        <div class="flex-grow-1 p-4">
+            <h2 class="mb-4" th:text="${titulo}">Registrar Nuevo Pago</h2>
+            
+            <div class="card shadow-sm">
+                <div class="card-body">
+                    
+                    <!-- El formulario apunta a /pagos/guardar, el cual maneja si es una edición (si tiene ID) o una creación -->
+                    <form th:action="@{/pagos/guardar}" th:object="${pago}" method="post">
+                        <input type="hidden" th:field="*{id}">
+
+                        <div class="mb-3">
+                            <label for="monto" class="form-label">Monto del Pago</label>
+                            <input type="number" step="0.01" class="form-control" id="monto"
+                                th:field="*{monto}" required placeholder="Ej: 15000.50">
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="fechaPago" class="form-label">Fecha del Pago</label>
+                            <input type="date" class="form-control" id="fechaPago"
+                                th:field="*{fechaPago}" required>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="descripcion" class="form-label">Descripción</label>
+                            <textarea class="form-control" id="descripcion" th:field="*{descripcion}"
+                                    rows="3" placeholder="Detalles o concepto del pago"></textarea>
+                        </div>
+
+                        <div class="mb-4">
+                            <label for="proyecto" class="form-label">Proyecto Asociado</label>
+                            <select class="form-select" id="proyecto" th:field="*{proyecto.id}" required>
+                                <option value="">-- Seleccione un Proyecto --</option>
+                                <option th:each="proj : ${proyectos}"
+                                        th:value="${proj.id}"
+                                        th:text="|${proj.nombre} (${proj.estado})|">
+                                </option>
+                            </select>
+                        </div>
+
+                        <div class="d-flex justify-content-between">
+                            <button type="submit" class="btn btn-success shadow-sm">
+                                <i class="bi bi-save me-2"></i>Guardar Pago
+                            </button>
+                            <a th:href="@{/pagos}" class="btn btn-secondary">
+                                <i class="bi bi-x-circle me-2"></i>Cancelar
+                            </a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

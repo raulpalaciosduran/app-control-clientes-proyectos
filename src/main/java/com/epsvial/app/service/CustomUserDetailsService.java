@@ -27,7 +27,8 @@ public class CustomUserDetailsService implements UserDetailsService {
         return User.builder()
                 .username(usuario.getUsername())
                 .password(usuario.getPassword()) // debe estar encriptada con BCrypt
-                .roles(usuario.getRole())        // ej. "ADMIN"
+                .roles(usuario.getRole())        // si guardas "ADMIN" o "USER" en BD
+                // .authorities(usuario.getRole()) // si guardas "ROLE_ADMIN" o "ROLE_USER"
                 .build();
     }
 }

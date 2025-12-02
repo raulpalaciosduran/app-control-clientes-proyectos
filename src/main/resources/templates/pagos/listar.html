@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Listado de Pagos</title>
+    <link rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+    <link rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+</head>
+<body class="bg-light">
+
+    <!-- Navbar fragment -->
+    <div th:replace="~{fragments/navbar :: navbar}"></div>
+
+    <div class="d-flex">
+        <!-- Sidebar fragment -->
+        <div th:replace="~{fragments/sidebar :: sidebar}"></div>
+
+        <!-- Contenido principal -->
+        <div class="flex-grow-1 p-4">
+            <div class="d-flex justify-content-between align-items-center mb-3">
+                <h2>Listado de Pagos</h2>
+                <a th:href="@{/pagos/nuevo}" class="btn btn-primary">
+                    <i class="bi bi-plus-circle"></i> Nuevo Pago
+                </a>
+            </div>
+
+            <!-- Tabla de pagos -->
+            <table class="table table-hover table-bordered">
+                <thead class="table-dark">
+                    <tr>
+                        <th>ID</th>
+                        <th>Monto</th>
+                        <th>Fecha</th>
+                        <th>Proyecto</th>
+                        <th>Estado Proyecto</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="pago : ${pagos}">
+                        <td th:text="${pago.id}"></td>
+                        <td th:text="${#numbers.formatDecimal(pago.monto, 0, 'COMMA', 2, 'POINT')} + ' MXN'"></td>
+                        <!-- ✅ Campo alineado con la entidad Pago.java -->
+                        <td th:text="${#temporals.format(pago.fechaPago, 'dd/MM/yyyy')}"></td>
+                        <!-- ✅ Manejo seguro de proyecto -->
+                        <td th:text="${pago.proyecto != null ? pago.proyecto.nombre : 'Sin proyecto'}"></td>
+                        <td th:text="${pago.proyecto != null ? pago.proyecto.estado : 'N/A'}"></td>
+                        <td>
+                            <a th:href="@{'/pagos/editar/' + ${pago.id}}" class="btn btn-warning btn-sm">
+                                <i class="bi bi-pencil"></i> Editar
+                            </a>
+                            <a th:href="@{'/pagos/eliminar/' + ${pago.id}}" 
+                               class="btn btn-danger btn-sm"
+                               onclick="return confirm('¿Seguro que deseas eliminar este pago?');">
+                               <i class="bi bi-trash"></i> Eliminar
+                            </a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <!-- Mensaje si no hay pagos -->
+            <div th:if="${pagos.isEmpty()}" class="alert alert-warning text-center">
+                No hay pagos registrados en la base de datos.
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
